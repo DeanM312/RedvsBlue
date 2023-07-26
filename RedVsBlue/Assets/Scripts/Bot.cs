@@ -143,10 +143,12 @@ public class Bot : MonoBehaviour
             {
 
                 //RaycastHit2D h = Physics2D.Linecast(transform.position - new Vector3(Mathf.Abs(rb.velocity.x) / 100, Mathf.Abs(rb.velocity.y) / 100,0), unit.transform.position, 1);
-                RaycastHit2D h = Physics2D.Linecast(transform.position, unit.transform.position, 1);
+                RaycastHit2D h = Physics2D.Linecast(transform.position - new Vector3(0, 0.01f, 0), unit.transform.position + new Vector3(0, 0.01f, 0), 1);
+                //RaycastHit2D h = Physics2D.Linecast(transform.position, unit.transform.position, 1);
+                Debug.DrawLine(transform.position - new Vector3(0, 0.01f, 0), unit.transform.position + new Vector3(0, 0.01f, 0));
 
                 if (!h)
-                {
+                { 
                     if (fireCooldown <= 0)
                     {
                         //Quaternion.LookRotation(Vector3.forward, rot) +
@@ -174,6 +176,14 @@ public class Bot : MonoBehaviour
 
                     backTime = 1f;
                 }
+                else
+                {
+                    tick++;
+                }
+            }
+            else
+            {
+                tick++;
             }
 
 
@@ -189,7 +199,7 @@ public class Bot : MonoBehaviour
             rb.AddForce(transform.up * 150);
         }
 
-        tick++;
+        
 
 
 

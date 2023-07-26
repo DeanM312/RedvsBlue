@@ -147,7 +147,7 @@ MonoBehaviour:
   hp: 100
   owner: {fileID: 0}
   cost: 50
-  defensive: 0
+  defensive: 1
   regenRate: 1
 --- !u!114 &4927351516914734561
 MonoBehaviour:

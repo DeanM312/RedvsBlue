@@ -39,9 +39,17 @@ public class Turret : MonoBehaviour
                 {
                     weaponScript.Fire(unit.transform.position, building.owner.faction1);
                 }
+                else
+                {
+                    tick++;
+                }
+            }
+            else
+            {
+                tick++;
             }
         }
 
-        tick++;
+        
     }
 }
