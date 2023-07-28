@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NormalAI : MonoBehaviour
+public class NormalAI : MonoBehaviour, IAI
 {
     public Unit user;
     private Base owner;
@@ -59,7 +59,7 @@ public class NormalAI : MonoBehaviour
             if (Mathf.Abs(unit.transform.position.x - transform.position.x) < user.range)
             {
                 RaycastHit2D h = Physics2D.Linecast(transform.position - new Vector3(0, 0.0f, 0), unit.transform.position + new Vector3(0, 0.0f, 0), 1);
-                Debug.DrawLine(transform.position - new Vector3(0, 0.01f, 0), unit.transform.position + new Vector3(0, 0.01f, 0));
+                //Debug.DrawLine(transform.position - new Vector3(0, 0.01f, 0), unit.transform.position + new Vector3(0, 0.01f, 0));
 
                 if (!h)
                 {
@@ -85,6 +85,11 @@ public class NormalAI : MonoBehaviour
         {
             user.Jump();
         }
+    }
+
+    public void Disable()
+    {
+        this.enabled = false;
     }
 
 

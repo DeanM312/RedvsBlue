@@ -24,6 +24,8 @@ public class Unit : MonoBehaviour
         weaponObject.GetComponent<SpriteRenderer>().color = (this.GetComponent<SpriteRenderer>().color);
         weapon = weaponObject.GetComponent<Weapon>();
         rb = this.GetComponent<Rigidbody2D>();
+
+
     }
 
     // Update is called once per frame
@@ -46,10 +48,11 @@ public class Unit : MonoBehaviour
 
 
 
-        if (Mathf.Abs(rb.velocity.x) < movespeed)
+        if (Mathf.Abs(rb.velocity.x) <= movespeed)
         {
-            rb.AddForce(transform.right * right * 5);
+            rb.AddForce(transform.right * right * 8);
         }
+
     }
 
     public void Jump()
