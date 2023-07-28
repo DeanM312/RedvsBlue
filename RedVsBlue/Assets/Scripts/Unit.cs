@@ -15,6 +15,7 @@ public class Unit : MonoBehaviour
     private uint jump;
     [System.NonSerialized]
     public int right;
+    public uint buildTime;
 
     // Start is called before the first frame update
     void Start()
@@ -46,12 +47,12 @@ public class Unit : MonoBehaviour
         }
 
 
+        rb.AddForce(transform.right * right * 8);
 
 
-        if (Mathf.Abs(rb.velocity.x) <= movespeed)
-        {
-            rb.AddForce(transform.right * right * 8);
-        }
+
+        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -movespeed, movespeed),rb.velocity.y);
+        
 
     }
 

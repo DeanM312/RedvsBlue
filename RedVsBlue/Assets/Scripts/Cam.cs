@@ -21,7 +21,14 @@ public class Cam : MonoBehaviour
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
 
-            Collider2D hit = Physics2D.OverlapPoint(mousePos2D, LayerMask.GetMask("Faction1"));
+            Collider2D hit = null;
+
+            hit = Physics2D.OverlapPoint(mousePos2D, LayerMask.GetMask("Faction1"));
+
+            if (hit == null)
+            {
+                hit = Physics2D.OverlapPoint(mousePos2D, LayerMask.GetMask("Faction2"));
+            }
             
 
             if (hit != null)

@@ -10,6 +10,7 @@ public class NormalAI : MonoBehaviour, IAI
     private float backTime;
     private int dir;
     private bool aggressive;
+    private BoxCollider2D hitbox;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,8 @@ public class NormalAI : MonoBehaviour, IAI
         {
             aggressive = true;
         }
+
+        hitbox = user.GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -58,8 +61,8 @@ public class NormalAI : MonoBehaviour, IAI
 
             if (Mathf.Abs(unit.transform.position.x - transform.position.x) < user.range)
             {
-                RaycastHit2D h = Physics2D.Linecast(transform.position - new Vector3(0, 0.0f, 0), unit.transform.position + new Vector3(0, 0.0f, 0), 1);
-                //Debug.DrawLine(transform.position - new Vector3(0, 0.01f, 0), unit.transform.position + new Vector3(0, 0.01f, 0));
+                RaycastHit2D h = Physics2D.Linecast(transform.position - new Vector3(0, 0.05f, 0), unit.transform.position + new Vector3(0, 0.05f, 0), 1);
+                Debug.DrawLine(transform.position - new Vector3(0, 0.05f, 0), unit.transform.position + new Vector3(0, 0.05f, 0));
 
                 if (!h)
                 {
@@ -81,7 +84,7 @@ public class NormalAI : MonoBehaviour, IAI
 
 
 
-        if (Physics2D.OverlapPoint(transform.position + (transform.right * user.right * 0.1f) - transform.up * 0.1f, 1) && Physics2D.OverlapPoint(transform.position - transform.up * 0.15f, 1))
+        if (Physics2D.OverlapPoint(transform.position + (transform.right * user.right * hitbox.size.x), 1) && Physics2D.OverlapPoint(transform.position - transform.up * hitbox.size.y / 1.6f, 1))
         {
             user.Jump();
         }

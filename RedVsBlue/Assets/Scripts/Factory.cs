@@ -32,11 +32,12 @@ public class Factory : MonoBehaviour
                     unit.layer = 7;
                 }
                 unit.GetComponent<SpriteRenderer>().color = this.GetComponent<SpriteRenderer>().color;
-                unit.GetComponent<Unit>().owner = building.owner;
+                Unit unitScript = unit.GetComponent<Unit>();
+                unitScript.owner = building.owner;
 
                 building.owner.units.Add(unit);
 
-                timer = 0f;
+                timer = 0f - unitScript.buildTime;
                 building.owner.mass -= 1;
             }
         }

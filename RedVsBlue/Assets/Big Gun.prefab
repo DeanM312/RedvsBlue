@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2757700189238899916}
   - component: {fileID: 8578810585255576472}
   m_Layer: 2
-  m_Name: Gun
+  m_Name: Big Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 70d99335e28565b4192b13f450c87dd5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9e8b2dfa8078fac4abc508cbaedff68c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,6 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c11d6b287c90e046ad3b9ce458ff8ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firerate: 0.4
+  firerate: 1
   projectile: {fileID: 6363712749743850712, guid: bbabfae2374232740ac4e980c9dc600d, type: 3}
-  damage: 35
+  damage: 100

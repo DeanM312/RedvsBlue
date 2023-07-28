@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitList:
   - {fileID: 6176610222213878778, guid: 0f4c1cc5796443948951a29cff5c7bb4, type: 3}
+  - {fileID: 6176610222213878778, guid: 905b3ebd7035e4a4aa0ea00f305f3d49, type: 3}
   building: {fileID: 7500137982255287424}
 --- !u!114 &7500137982255287424
 MonoBehaviour:

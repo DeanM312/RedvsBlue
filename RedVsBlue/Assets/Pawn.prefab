@@ -147,7 +147,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00081460923, y: 0.019594744}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -173,9 +173,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  movespeed: 1
+  movespeed: 0.7
   hp: 100
-  range: 4
+  range: 3
   weaponPrefab: {fileID: 4148752083154824892, guid: 1dc4b27378542654baf135ee2ad75b10, type: 3}
 --- !u!114 &2054191334974200
 MonoBehaviour:

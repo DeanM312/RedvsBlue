@@ -6,10 +6,14 @@ public class Player : MonoBehaviour
 {
     public Unit user;
     public Cam cam;
+    private BoxCollider2D hitbox;
+
     // Start is called before the first frame update
     void Start()
     {
         cam.enabled = false;
+
+        hitbox = user.GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -39,7 +43,7 @@ public class Player : MonoBehaviour
         }
 
 
-            if (Input.GetAxis("Vertical") > 0 && Physics2D.OverlapPoint(transform.position - transform.up * 0.15f, 1))
+        if (Input.GetAxis("Vertical") > 0 && Physics2D.OverlapPoint(transform.position - transform.up * hitbox.size.y / 1.6f, 1))
         {
             user.Jump();
         }

@@ -94,12 +94,12 @@ public class Base : MonoBehaviour
                     }
                 }
             }
+            BoxCollider2D hitbox = units[front].GetComponent<BoxCollider2D>();
 
-
-            if (Physics2D.OverlapPoint(units[front].transform.position - units[front].transform.up * 0.15f, 1) && Physics2D.OverlapPointAll(units[front].transform.position).Length < 2)
+            if (Physics2D.OverlapPoint(units[front].transform.position - units[front].transform.up * hitbox.size.y/1.6f, 1) && Physics2D.OverlapPointAll(units[front].transform.position).Length < 2)
             {
                 GameObject building = Instantiate(selected.gameObject, units[front].transform.position, Quaternion.identity);
-                building.transform.Translate(0,(building.GetComponent<BoxCollider2D>().size.y - units[front].GetComponent<BoxCollider2D>().size.y)/2, 0);
+                building.transform.Translate(0,(building.GetComponent<BoxCollider2D>().size.y - hitbox.size.y)/2, 0);
 
                 if (faction1)
                 {
