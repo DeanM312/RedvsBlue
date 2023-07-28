@@ -53,7 +53,7 @@ public class Base : MonoBehaviour
                 unit.layer = 7;
             }
             unit.GetComponent<SpriteRenderer>().color = this.GetComponent<SpriteRenderer>().color;
-            unit.GetComponent<Bot>().owner = this;
+            unit.GetComponent<Unit>().owner = this;
 
             units.Add(unit);
             

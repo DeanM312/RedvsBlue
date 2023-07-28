@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 6176610222213878773}
   - component: {fileID: 6176610222213878775}
   - component: {fileID: 6176610222213878774}
-  - component: {fileID: 4585765612927253936}
+  - component: {fileID: 1657302156075901659}
+  - component: {fileID: 2054191334974200}
   m_Layer: 0
   m_Name: T1Bot
   m_TagString: Unit
@@ -159,7 +160,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.12115687, y: 0.2808105}
   m_EdgeRadius: 0
---- !u!114 &4585765612927253936
+--- !u!114 &1657302156075901659
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,10 +169,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 6176610222213878778}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18408d57d13225643b6cac3889786e44, type: 3}
+  m_Script: {fileID: 11500000, guid: cfdde7f9e3838a541b9f1971b88d5a40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  hp: 0
-  prefab: {fileID: 6363712749743850712, guid: bbabfae2374232740ac4e980c9dc600d, type: 3}
-  range: 3
+  movespeed: 1
+  hp: 100
+  range: 4
+  weaponPrefab: {fileID: 4148752083154824892, guid: fc3664c8dca550a48a24f4cb249c0a14, type: 3}
+--- !u!114 &2054191334974200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6176610222213878778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7c58df2f9499544f9c162f684114599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  user: {fileID: 1657302156075901659}

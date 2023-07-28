@@ -32,7 +32,7 @@ public class Factory : MonoBehaviour
                     unit.layer = 7;
                 }
                 unit.GetComponent<SpriteRenderer>().color = this.GetComponent<SpriteRenderer>().color;
-                unit.GetComponent<Bot>().owner = building.owner;
+                unit.GetComponent<Unit>().owner = building.owner;
 
                 building.owner.units.Add(unit);
 
