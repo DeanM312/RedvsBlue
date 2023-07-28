@@ -9,6 +9,7 @@ public class NormalAI : MonoBehaviour
     private int tick;
     private float backTime;
     private int dir;
+    private bool aggressive;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,13 +23,18 @@ public class NormalAI : MonoBehaviour
         {
             dir = 1;
         }
+
+        if (Random.Range(0,2) == 0)
+        {
+            aggressive = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (backTime > 0)
+        if (backTime > 0 && !aggressive)
         {
             backTime -= 1 * Time.deltaTime;
             user.right = -1 * dir;
@@ -52,7 +58,7 @@ public class NormalAI : MonoBehaviour
 
             if (Mathf.Abs(unit.transform.position.x - transform.position.x) < user.range)
             {
-                RaycastHit2D h = Physics2D.Linecast(transform.position - new Vector3(0, 0.02f, 0), unit.transform.position + new Vector3(0, 0.02f, 0), 1);
+                RaycastHit2D h = Physics2D.Linecast(transform.position - new Vector3(0, 0.0f, 0), unit.transform.position + new Vector3(0, 0.0f, 0), 1);
                 Debug.DrawLine(transform.position - new Vector3(0, 0.01f, 0), unit.transform.position + new Vector3(0, 0.01f, 0));
 
                 if (!h)

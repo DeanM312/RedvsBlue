@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
     public double firerate;
     private double fireCooldown = 0f;
     public GameObject projectile;
+    public int damage;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +35,7 @@ public class Weapon : MonoBehaviour
             Projectile proj = bullet.GetComponent<Projectile>();
             proj.velocity = rot.normalized * 10;
             proj.GetComponent<SpriteRenderer>().color = (this.GetComponent<SpriteRenderer>().color);
+            proj.damage = damage;
 
             if (!faction1)
             {

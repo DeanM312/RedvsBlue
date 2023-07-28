@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1657302156075901659}
   - component: {fileID: 2054191334974200}
   m_Layer: 0
-  m_Name: T1Bot
+  m_Name: Pawn
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
   movespeed: 1
   hp: 100
   range: 4
-  weaponPrefab: {fileID: 4148752083154824892, guid: fc3664c8dca550a48a24f4cb249c0a14, type: 3}
+  weaponPrefab: {fileID: 4148752083154824892, guid: 1dc4b27378542654baf135ee2ad75b10, type: 3}
 --- !u!114 &2054191334974200
 MonoBehaviour:
   m_ObjectHideFlags: 0
