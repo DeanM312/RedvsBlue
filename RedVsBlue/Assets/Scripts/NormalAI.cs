@@ -11,6 +11,7 @@ public class NormalAI : MonoBehaviour, IAI
     private int dir;
     private bool aggressive;
     private BoxCollider2D hitbox;
+    private uint delay;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,36 +62,56 @@ public class NormalAI : MonoBehaviour, IAI
 
             if (Mathf.Abs(unit.transform.position.x - transform.position.x) < user.range)
             {
-                RaycastHit2D h = Physics2D.Linecast(transform.position - new Vector3(0, 0.05f, 0), unit.transform.position + new Vector3(0, 0.05f, 0), 1);
-                Debug.DrawLine(transform.position - new Vector3(0, 0.05f, 0), unit.transform.position + new Vector3(0, 0.05f, 0));
+                RaycastHit2D h = Physics2D.Linecast(transform.position, unit.transform.position, 1);
+                //Debug.DrawLine(transform.position - new Vector3(0, 0.05f, 0), unit.transform.position + new Vector3(0, 0.05f, 0));
 
                 if (!h)
                 {
-                    user.weapon.Fire(unit.transform.position, user.owner.faction1);
-                    backTime = 1f;
+                    Debug.Log(delay);
+                    if (delay > 9)
+                    {
+                        user.weapon.Fire(unit.transform.position, user.owner.faction1);
+                        backTime = 1f;
+                    }
+                    else
+                    {
+                        delay++;
+                    }
+                    
                 }
                 else
                 {
+                    delay = 0;
                     tick++;
                 }
             }
             else
             {
+                delay = 0;
                 tick++;
             }
 
 
         }
 
+        Debug.DrawLine(transform.position, transform.position - transform.up * hitbox.bounds.extents.y);
 
-
-        if (Physics2D.OverlapPoint(transform.position + (transform.right * user.right * hitbox.size.x), 1) && Physics2D.OverlapPoint(transform.position - transform.up * hitbox.size.y / 1.6f, 1))
+        if (Physics2D.OverlapPoint(transform.position + (transform.right * user.right * hitbox.size.x), 1) && Physics2D.OverlapPoint(transform.position - transform.up * hitbox.bounds.extents.y, 1))
         {
             user.Jump();
         }
     }
 
-    public void Disable()
+    void FixedUpdate()
+    {
+        if (Random.Range(0,100) == 0 && Physics2D.OverlapPoint(transform.position - transform.up * hitbox.bounds.extents.y * 1.16f))
+        {
+            user.Jump();
+        }
+                
+    }
+
+        public void Disable()
     {
         this.enabled = false;
     }

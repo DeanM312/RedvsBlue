@@ -98,5 +98,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firerate: 1
-  projectile: {fileID: 6363712749743850712, guid: bbabfae2374232740ac4e980c9dc600d, type: 3}
+  projectile: {fileID: 6363712749743850712, guid: 521fc7262dbf07e4eac998d64c87283e, type: 3}
   damage: 100

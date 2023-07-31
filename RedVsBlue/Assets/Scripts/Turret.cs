@@ -9,6 +9,7 @@ public class Turret : MonoBehaviour
     private Weapon weaponScript;
     private int tick;
     public int range;
+    private int delay;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,10 +38,19 @@ public class Turret : MonoBehaviour
 
                 if (!h)
                 {
-                    weaponScript.Fire(unit.transform.position, building.owner.faction1);
+                    if (delay > 9)
+                    {
+                        weaponScript.Fire(unit.transform.position, building.owner.faction1);
+                    }
+                    else
+                    {
+                        delay++;
+                    }
+                    
                 }
                 else
                 {
+                    delay = 0;
                     tick++;
                 }
             }

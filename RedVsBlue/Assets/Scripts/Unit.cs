@@ -37,7 +37,7 @@ public class Unit : MonoBehaviour
         switch (jump)
         {
             case 1:
-                rb.AddForce(transform.up * 80);
+                rb.AddForce(transform.up * 100);
                 jump = 0;
                 break;
             case 2:
