@@ -10,7 +10,7 @@ public class NormalAI : MonoBehaviour, IAI
     private float backTime;
     private int dir;
     private bool aggressive;
-    private BoxCollider2D hitbox;
+    
     private uint delay;
     // Start is called before the first frame update
     void Start()
@@ -31,7 +31,7 @@ public class NormalAI : MonoBehaviour, IAI
             aggressive = true;
         }
 
-        hitbox = user.GetComponent<BoxCollider2D>();
+        
     }
 
     // Update is called once per frame
@@ -67,7 +67,6 @@ public class NormalAI : MonoBehaviour, IAI
 
                 if (!h)
                 {
-                    Debug.Log(delay);
                     if (delay > 9)
                     {
                         user.weapon.Fire(unit.transform.position, user.owner.faction1);
@@ -94,9 +93,9 @@ public class NormalAI : MonoBehaviour, IAI
 
         }
 
-        Debug.DrawLine(transform.position, transform.position - transform.up * hitbox.bounds.extents.y);
+        //Debug.DrawLine(transform.position, transform.position - transform.up * hitbox.bounds.extents.y);
 
-        if (Physics2D.OverlapPoint(transform.position + (transform.right * user.right * hitbox.size.x), 1) && Physics2D.OverlapPoint(transform.position - transform.up * hitbox.bounds.extents.y, 1))
+        if (Physics2D.OverlapPoint(transform.position + (transform.right * user.right * user.hitbox.size.x), 1))
         {
             user.Jump();
         }
@@ -104,14 +103,13 @@ public class NormalAI : MonoBehaviour, IAI
 
     void FixedUpdate()
     {
-        if (Random.Range(0,100) == 0 && Physics2D.OverlapPoint(transform.position - transform.up * hitbox.bounds.extents.y * 1.16f))
+        if (Random.Range(0, 100) == 0)
         {
             user.Jump();
-        }
-                
+        }  
     }
 
-        public void Disable()
+    public void Disable()
     {
         this.enabled = false;
     }

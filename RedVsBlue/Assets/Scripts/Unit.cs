@@ -16,6 +16,9 @@ public class Unit : MonoBehaviour
     [System.NonSerialized]
     public int right;
     public uint buildTime;
+    public BoxCollider2D hitbox;
+    private float jumpDelay;
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,28 +27,32 @@ public class Unit : MonoBehaviour
         weaponObject.transform.parent = transform;
         weaponObject.GetComponent<SpriteRenderer>().color = (this.GetComponent<SpriteRenderer>().color);
         weapon = weaponObject.GetComponent<Weapon>();
+        weapon.range = range-0.1f;
         rb = this.GetComponent<Rigidbody2D>();
 
-
+        hitbox = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
 
-
         switch (jump)
         {
             case 1:
-                rb.AddForce(transform.up * 100);
+                rb.AddForce(transform.up * 400);
                 jump = 0;
                 break;
             case 2:
-                rb.AddForce(transform.up * 300);
+                rb.AddForce(transform.up * 1000);
                 jump = 0;
                 break;
         }
 
+        if (jumpDelay >= 0)
+        {
+            jumpDelay -= 1 * Time.fixedDeltaTime;
+        }
 
         rb.AddForce(transform.right * right * 8);
 
@@ -58,7 +65,11 @@ public class Unit : MonoBehaviour
 
     public void Jump()
     {
-        jump = 1;
+        if (Physics2D.OverlapPoint(transform.position - transform.up * hitbox.bounds.extents.y * 1.01f,1) && jumpDelay <= 0)
+        {
+            jumpDelay = 0.5f;
+            jump = 1;
+        }
     }
 
     public void PadJump()
@@ -106,6 +117,14 @@ public class Unit : MonoBehaviour
                 mex.ownerObj = owner;
             }
 
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Ladder"))
+        {
+            rb.AddForce(transform.up * 20);
         }
     }
 }

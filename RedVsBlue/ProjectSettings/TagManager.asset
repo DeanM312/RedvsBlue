@@ -10,6 +10,7 @@ TagManager:
   - Mex
   - Unit
   - Building
+  - Ladder
   layers:
   - Default
   - TransparentFX

@@ -8,6 +8,8 @@ public class Weapon : MonoBehaviour
     private double fireCooldown = 0f;
     public GameObject projectile;
     public int damage;
+    public float range;
+    public float speed;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,9 +35,10 @@ public class Weapon : MonoBehaviour
             bullet.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(rot.y, rot.x) * Mathf.Rad2Deg);
             transform.rotation = bullet.transform.rotation;
             Projectile proj = bullet.GetComponent<Projectile>();
-            proj.velocity = rot.normalized * 10;
+            proj.velocity = rot.normalized * speed;
             proj.GetComponent<SpriteRenderer>().color = (this.GetComponent<SpriteRenderer>().color);
             proj.damage = damage;
+            Destroy(proj.gameObject, range / speed);
 
             if (!faction1)
             {

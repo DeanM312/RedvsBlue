@@ -19,7 +19,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cam.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y,-1);
+
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        cam.gameObject.transform.position = transform.position + (mousePos - new Vector3(transform.position.x, transform.position.y, 1))/ 2;
 
         if (Input.GetAxis("Horizontal") > 0)
         {
@@ -37,13 +39,12 @@ public class Player : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
             user.weapon.Fire(mousePos2D, user.owner.faction1);
         }
 
 
-        if (Input.GetAxis("Vertical") > 0 && Physics2D.OverlapPoint(transform.position - transform.up * hitbox.size.y / 1.6f, 1))
+        if (Input.GetAxis("Vertical") > 0)
         {
             user.Jump();
         }

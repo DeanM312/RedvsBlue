@@ -16,6 +16,7 @@ public class Turret : MonoBehaviour
         GameObject weapon = Instantiate(weaponPrefab, transform.position, Quaternion.identity);
         weapon.transform.parent = transform;
         weaponScript = weapon.GetComponent<Weapon>();
+        weaponScript.range = range;
         weapon.GetComponent<SpriteRenderer>().color = (this.GetComponent<SpriteRenderer>().color);
     }
 

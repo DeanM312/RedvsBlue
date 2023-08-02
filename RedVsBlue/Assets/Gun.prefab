@@ -100,3 +100,5 @@ MonoBehaviour:
   firerate: 0.3
   projectile: {fileID: 6363712749743850712, guid: bbabfae2374232740ac4e980c9dc600d, type: 3}
   damage: 35
+  range: 0
+  speed: 30
