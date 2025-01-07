@@ -144,11 +144,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165e6138c285c204eb4c69b9bbeaf0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 210
+  hp: 400
   owner: {fileID: 0}
-  cost: 80
+  cost: 60
   defensive: 1
-  regenRate: 1
+  regenRate: 4
 --- !u!114 &4927351516914734561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,5 +162,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   building: {fileID: 3725056983930785386}
-  weaponPrefab: {fileID: 4148752083154824892, guid: ebeb1a150c5c15543b8b0ad922c4c9dc, type: 3}
-  range: 14
+  weaponPrefab: {fileID: 4148752083154824892, guid: f92ed721de0223e4a9c0368e6822edf0, type: 3}
+  range: 17

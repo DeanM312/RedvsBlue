@@ -173,9 +173,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  movespeed: 2.5
-  hp: 80
-  range: 10
+  movespeed: 3
+  hp: 120
+  range: 15
   weaponPrefab: {fileID: 4148752083154824892, guid: 3ce77e164b7bf414d926f4fbcd96bbdb, type: 3}
   buildTime: 8
   hitbox: {fileID: 0}

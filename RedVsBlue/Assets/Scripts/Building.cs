@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Building : MonoBehaviour
+public class Building : MonoBehaviour, IDamagable
 {
     public int hp = 100;
     private int inithp;
@@ -43,5 +43,15 @@ public class Building : MonoBehaviour
         }
 
 
+    }
+
+    public void TakeDamage(int damage)
+    {
+        hp -= damage;
+
+        if (hp <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

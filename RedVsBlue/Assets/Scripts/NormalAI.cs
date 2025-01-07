@@ -8,8 +8,9 @@ public class NormalAI : MonoBehaviour, IAI
     private Base owner;
     private int tick;
     private float backTime;
+    private float forwardTime;
     private int dir;
-    private bool aggressive;
+    private float downTime;
     
     private uint delay;
     // Start is called before the first frame update
@@ -26,29 +27,31 @@ public class NormalAI : MonoBehaviour, IAI
             dir = 1;
         }
 
-        if (Random.Range(0,2) == 0)
-        {
-            aggressive = true;
-        }
-
-        
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (backTime > 0 && !aggressive)
+        if (backTime > 0)
         {
             backTime -= 1 * Time.deltaTime;
             user.right = -1 * dir;
         }
         else
         {
+            if (forwardTime > 0)
+            {
+                forwardTime -= 1 * Time.deltaTime;
+            }
             user.right = 1 * dir;
         }
 
-
+        if (downTime > 0)
+        {
+            downTime -= 1 * Time.deltaTime;
+            user.Down();
+        }
 
 
         if (tick > owner.enemy.units.Count - 1)
@@ -60,23 +63,48 @@ public class NormalAI : MonoBehaviour, IAI
         {
             GameObject unit = owner.enemy.units[tick];
 
-            if (Mathf.Abs(unit.transform.position.x - transform.position.x) < user.range)
+            if (unit)
             {
-                RaycastHit2D h = Physics2D.Linecast(transform.position, unit.transform.position, 1);
-                //Debug.DrawLine(transform.position - new Vector3(0, 0.05f, 0), unit.transform.position + new Vector3(0, 0.05f, 0));
-
-                if (!h)
+                Vector3 predict = Vector3.zero;
+                if (Random.Range(0, 2) == 0 && !user.weapon.arty && unit.GetComponent<Rigidbody2D>())
                 {
-                    if (delay > 9)
+                    predict = (Vector2.Distance(unit.transform.position, transform.position) / user.weapon.speed) * unit.GetComponent<Rigidbody2D>().velocity;
+                }
+
+                if (Vector2.Distance(unit.transform.position, transform.position) < user.range)
+                {
+                    RaycastHit2D h = Physics2D.Linecast(transform.position, unit.transform.position, 1);
+                    //Debug.DrawLine(transform.position - new Vector3(0, 0.05f, 0), unit.transform.position + new Vector3(0, 0.05f, 0));
+
+                    if (!h || user.weapon.arty)
                     {
-                        user.weapon.Fire(unit.transform.position, user.owner.faction1);
-                        backTime = 1f;
+                        if (delay > 9)
+                        {
+                            user.weapon.Fire(unit.transform.position + predict, user.owner.faction1);
+                            if (forwardTime <= 0)
+                            {
+                                if (!user.owner.retreat)
+                                {
+                                    backTime = ((float)user.weapon.firerate) / 2;
+                                    forwardTime = Random.value * 0.05f;
+                                }
+                                else
+                                {
+                                    backTime = ((float)user.weapon.firerate) / 0.5f;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            delay++;
+                        }
+
                     }
                     else
                     {
-                        delay++;
+                        delay = 0;
+                        tick++;
                     }
-                    
                 }
                 else
                 {
@@ -103,7 +131,21 @@ public class NormalAI : MonoBehaviour, IAI
 
     void FixedUpdate()
     {
-        if (Random.Range(0, 100) == 0)
+
+        if (forwardTime > 0)
+        {
+
+            user.Jump();
+            
+            if (Random.Range(0, 15) == 0)
+            {
+                if (!Physics2D.OverlapPoint(transform.position - transform.up * user.hitbox.bounds.extents.y * 1.01f, 1))
+                {
+                    downTime = 0.1f;
+                }
+            }
+        }
+        else if (Random.Range(0, 100) == 0)
         {
             user.Jump();
         }  

@@ -40,6 +40,17 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+
+            if (user.weapon.arty)
+            {
+                if (Vector2.Distance(transform.position, mousePos2D) > user.range)
+                {
+                    Vector2 pos2D = new Vector2(transform.position.x, transform.position.y);
+                    Vector2 vect = mousePos2D - pos2D;
+                    mousePos2D = pos2D + vect.normalized*user.range;
+                }
+            }
+
             user.weapon.Fire(mousePos2D, user.owner.faction1);
         }
 
@@ -47,6 +58,10 @@ public class Player : MonoBehaviour
         if (Input.GetAxis("Vertical") > 0)
         {
             user.Jump();
+        }
+        else if (Input.GetAxis("Vertical") < 0)
+        {
+            user.Down();
         }
     }
 

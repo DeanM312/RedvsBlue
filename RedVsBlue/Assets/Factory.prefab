@@ -103,6 +103,8 @@ MonoBehaviour:
   - {fileID: 6176610222213878778, guid: 0f4c1cc5796443948951a29cff5c7bb4, type: 3}
   - {fileID: 6176610222213878778, guid: 905b3ebd7035e4a4aa0ea00f305f3d49, type: 3}
   - {fileID: 6176610222213878778, guid: cf607abc3d383ae43827068ba1b49e62, type: 3}
+  - {fileID: 6176610222213878778, guid: e8d094ae67e98c5498f8417e6fe6c40a, type: 3}
+  - {fileID: 6176610222213878778, guid: 885b68b4f19782c4c9d2f332ceb213f4, type: 3}
   building: {fileID: 7500137982255287424}
 --- !u!114 &7500137982255287424
 MonoBehaviour:
@@ -118,7 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 150
   owner: {fileID: 0}
-  cost: 60
+  cost: 100
   defensive: 0
   regenRate: 1
 --- !u!61 &-7695226175476236575

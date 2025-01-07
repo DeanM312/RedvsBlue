@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : MonoBehaviour
+public class Unit : MonoBehaviour, IDamagable
 {
     public Base owner;
     public float movespeed;
@@ -18,6 +18,9 @@ public class Unit : MonoBehaviour
     public uint buildTime;
     public BoxCollider2D hitbox;
     private float jumpDelay;
+    private float flashTime;
+    private bool hit;
+    private int down;
 
 
     // Start is called before the first frame update
@@ -27,7 +30,7 @@ public class Unit : MonoBehaviour
         weaponObject.transform.parent = transform;
         weaponObject.GetComponent<SpriteRenderer>().color = (this.GetComponent<SpriteRenderer>().color);
         weapon = weaponObject.GetComponent<Weapon>();
-        weapon.range = range-0.1f;
+        weapon.range = range - 0.1f;
         rb = this.GetComponent<Rigidbody2D>();
 
         hitbox = GetComponent<BoxCollider2D>();
@@ -44,7 +47,7 @@ public class Unit : MonoBehaviour
                 jump = 0;
                 break;
             case 2:
-                rb.AddForce(transform.up * 1000);
+                rb.AddForce(transform.up * 600);
                 jump = 0;
                 break;
         }
@@ -54,27 +57,52 @@ public class Unit : MonoBehaviour
             jumpDelay -= 1 * Time.fixedDeltaTime;
         }
 
-        rb.AddForce(transform.right * right * 8);
+        rb.AddForce(transform.right * right * 80);
 
 
 
-        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -movespeed, movespeed),rb.velocity.y);
-        
+        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -movespeed, movespeed), rb.velocity.y);
+
+        if (rb.velocity.y > -100 && down == 1)
+        {
+            rb.AddForce(transform.up * -50);
+            down = 0;
+        }
+    }
+
+    private void Update()
+    {
+        if (flashTime > 0)
+        {
+            flashTime = flashTime - 1 * Time.deltaTime;
+        }
+        else if (hit)
+        {
+            this.GetComponent<SpriteRenderer>().color = this.owner.GetComponent<SpriteRenderer>().color;
+            hit = false;
+        }
+
 
     }
 
     public void Jump()
     {
-        if (Physics2D.OverlapPoint(transform.position - transform.up * hitbox.bounds.extents.y * 1.01f,1) && jumpDelay <= 0)
+        if (Physics2D.OverlapPoint(transform.position - transform.up * hitbox.bounds.extents.y * 1.05f, 1) && jumpDelay <= 0)
         {
-            jumpDelay = 0.5f;
+            rb.velocity = Vector2.zero;
+            jumpDelay = 0.05f;
             jump = 1;
         }
     }
 
     public void PadJump()
     {
-        jump = 2;
+        if (jumpDelay <= 0)
+        {
+            rb.velocity = Vector2.zero;
+            jump = 2;
+            jumpDelay = 0.5f;
+        }
     }
 
 
@@ -85,13 +113,7 @@ public class Unit : MonoBehaviour
     {
         if (col.gameObject.tag == "Projectile")
         {
-            hp = hp - col.gameObject.GetComponent<Projectile>().damage;
-            if (hp <= 0)
-            {
-                owner.units.Remove(this.gameObject);
-                Destroy(this.gameObject);
-            }
-
+            this.TakeDamage(col.gameObject.GetComponent<Projectile>().damage);
         }
 
 
@@ -124,7 +146,29 @@ public class Unit : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ladder"))
         {
-            rb.AddForce(transform.up * 20);
+            if (rb.velocity.y < 100)
+            {
+                rb.AddForce(transform.up * 20);
+            }
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        hp -= damage;
+        this.GetComponent<SpriteRenderer>().color = Color.white;
+        flashTime = 0.1f;
+        hit = true;
+
+        if (hp <= 0)
+        {
+            owner.units.Remove(this.gameObject);
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void Down()
+    {
+        down = 1;
     }
 }

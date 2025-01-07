@@ -175,7 +175,7 @@ MonoBehaviour:
   owner: {fileID: 0}
   movespeed: 2
   hp: 100
-  range: 10
+  range: 15
   weaponPrefab: {fileID: 4148752083154824892, guid: 1dc4b27378542654baf135ee2ad75b10, type: 3}
   buildTime: 0
   hitbox: {fileID: 0}

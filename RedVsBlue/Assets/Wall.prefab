@@ -98,11 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 165e6138c285c204eb4c69b9bbeaf0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 300
+  hp: 1000
   owner: {fileID: 0}
   cost: 25
   defensive: 1
-  regenRate: 4
+  regenRate: 2
 --- !u!61 &8454106061976155290
 BoxCollider2D:
   m_ObjectHideFlags: 0

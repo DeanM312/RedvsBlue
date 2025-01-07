@@ -153,3 +153,10 @@ MonoBehaviour:
   - {fileID: 5693965157381069292, guid: 6c28aa173e5972745bcf6d075c7c75f6, type: 3}
   - {fileID: 4274051651846231259, guid: 35b52708600c8c44dbb1547b442f8ac5, type: 3}
   - {fileID: 5693965157381069292, guid: 47a92267fa6276f41a9be53e8cba2e35, type: 3}
+  - {fileID: 5693965157381069292, guid: fa9df87ed2ade1f428901a6645aded60, type: 3}
+  - {fileID: 4274051651846231259, guid: c3fa72a71148a35448e052d653319261, type: 3}
+  - {fileID: 931911363508799206, guid: 7dd5e3fd9a1f76540968f9d397d2bfdc, type: 3}
+  advMass: 0
+  advBuildingList:
+  - {fileID: 4274051651846231259, guid: 1c1622b97b4b7cf45987a32fdbd8a580, type: 3}
+  retreat: 0

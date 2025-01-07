@@ -10,6 +10,7 @@ public class Turret : MonoBehaviour
     private int tick;
     public int range;
     private int delay;
+    private Vector3 lastPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,26 +33,42 @@ public class Turret : MonoBehaviour
         if (building.owner.enemy.units.Count > 0)
         {
             GameObject unit = building.owner.enemy.units[tick];
-
-            if (Mathf.Abs(unit.transform.position.x - transform.position.x) < range)
+            if (unit)
             {
-                RaycastHit2D h = Physics2D.Linecast(transform.position, unit.transform.position, 1);
 
-                if (!h)
+                Vector3 predict = Vector3.zero;
+                if (Random.Range(0, 2) == 0 && !weaponScript.arty && unit.GetComponent<Rigidbody2D>())
                 {
-                    if (delay > 9)
+                    predict = (Vector2.Distance(unit.transform.position, transform.position) / weaponScript.speed) * unit.GetComponent<Rigidbody2D>().velocity;
+                }
+
+                if (Mathf.Abs(unit.transform.position.x - transform.position.x) < range)
+                {
+                    RaycastHit2D h = Physics2D.Linecast(transform.position, unit.transform.position, 1);
+
+                    if (!h || weaponScript.arty)
                     {
-                        weaponScript.Fire(unit.transform.position, building.owner.faction1);
+                        if (delay > 9)
+                        {
+
+                            weaponScript.Fire(unit.transform.position + predict, building.owner.faction1);
+                            lastPos = unit.transform.position;
+
+                        }
+                        else
+                        {
+                            delay++;
+                        }
+
                     }
                     else
                     {
-                        delay++;
+                        delay = 0;
+                        tick++;
                     }
-                    
                 }
                 else
                 {
-                    delay = 0;
                     tick++;
                 }
             }
@@ -60,7 +77,10 @@ public class Turret : MonoBehaviour
                 tick++;
             }
         }
+        if (lastPos != Vector3.zero)
+        {
+            weaponScript.Fire(lastPos, building.owner.faction1);
+        }
 
-        
     }
 }
