@@ -69,130 +69,12 @@ public class Base : MonoBehaviour
 
         if (mass > selected.cost)
         {
-            int front = 0;
-            if (selected.defensive)
-            {
-                /*
-                for (int i = front; i < units.Count; i++)
-                {
-                    if (units[front].CompareTag("Unit"))
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        front++;
-                    }
-                }
-                */
-                front = Random.Range(0, units.Count);
-            }
-            else
-            {
-                front = units.Count-1;
-
-                for (int i = front; i > 0; i--)
-                {
-                    if (units[front].CompareTag("Unit"))
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        front++;
-                    }
-                }
-            }
-            BoxCollider2D hitbox = units[front].GetComponent<BoxCollider2D>();
-
-            if (Physics2D.OverlapPoint(units[front].transform.position - (units[front].transform.up * hitbox.size.y)/2, 1) && Physics2D.OverlapPointAll(units[front].transform.position).Length < 2 && units[front].CompareTag("Unit"))
-            {
-                GameObject building = Instantiate(selected.gameObject, units[front].transform.position, Quaternion.identity);
-                building.transform.Translate(0,(building.GetComponent<BoxCollider2D>().size.y - hitbox.size.y)/2, 0);
-
-                if (faction1)
-                {
-                    building.layer = 6;
-                }
-                else
-                {
-                    building.layer = 7;
-                }
-
-
-                building.GetComponent<SpriteRenderer>().color = this.GetComponent<SpriteRenderer>().color;
-                building.GetComponent<Building>().owner = this;
-
-                mass -= selected.cost;
-                int selection = Random.Range(0, buildingList.Count);
-                selected = buildingList[selection].GetComponent<Building>();
-
-                units.Add(building);
-            }
+            constructBuliding(selected, 0);
         }
 
         if (advMass > advSelected.cost)
         {
-            int front = 0;
-            if (advSelected.defensive)
-            {
-                /*
-                for (int i = front; i < units.Count; i++)
-                {
-                    if (units[front].CompareTag("Unit"))
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        front++;
-                    }
-                }
-                */
-                front = Random.Range(0, units.Count);
-            }
-            else
-            {
-                front = units.Count - 1;
-
-                for (int i = front; i > 0; i--)
-                {
-                    if (units[front].CompareTag("Unit"))
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        front++;
-                    }
-                }
-            }
-            BoxCollider2D hitbox = units[front].GetComponent<BoxCollider2D>();
-
-            if (Physics2D.OverlapPoint(units[front].transform.position - (units[front].transform.up * hitbox.size.y) / 2, 1) && Physics2D.OverlapPointAll(units[front].transform.position).Length < 2 && units[front].CompareTag("Unit"))
-            {
-                GameObject building = Instantiate(advSelected.gameObject, units[front].transform.position, Quaternion.identity);
-                building.transform.Translate(0, (building.GetComponent<BoxCollider2D>().size.y - hitbox.size.y) / 2, 0);
-
-                if (faction1)
-                {
-                    building.layer = 6;
-                }
-                else
-                {
-                    building.layer = 7;
-                }
-
-
-                building.GetComponent<SpriteRenderer>().color = this.GetComponent<SpriteRenderer>().color;
-                building.GetComponent<Building>().owner = this;
-
-                advMass -= advSelected.cost;
-                int selection = Random.Range(0, advBuildingList.Count);
-                advSelected = advBuildingList[selection].GetComponent<Building>();
-
-                units.Add(building);
-            }
+            constructBuliding(advSelected, 1);
         }
 
         if (advantage < 0.9)
@@ -232,6 +114,68 @@ public class Base : MonoBehaviour
         }
 
 
+    }
+
+    void constructBuliding(Building selectedBuilding, uint tier)
+    {
+        int front = 0;
+        if (selectedBuilding.defensive)
+        {
+            front = Random.Range(0, units.Count);
+        }
+        else
+        {
+            front = units.Count - 1;
+
+            for (int i = front; i > 0; i--)
+            {
+                if (units[front].CompareTag("Unit"))
+                {
+                    break;
+                }
+                else
+                {
+                    front++;
+                }
+            }
+        }
+
+
+        BoxCollider2D hitbox = units[front].GetComponent<BoxCollider2D>();
+
+        if (Physics2D.OverlapPoint(units[front].transform.position - (units[front].transform.up * hitbox.size.y) / 2, 1) && Physics2D.OverlapPointAll(units[front].transform.position).Length < 2 && units[front].CompareTag("Unit"))
+        {
+            GameObject building = Instantiate(selectedBuilding.gameObject, units[front].transform.position, Quaternion.identity);
+            building.transform.Translate(0, (building.GetComponent<BoxCollider2D>().size.y - hitbox.size.y) / 2, 0);
+
+            if (faction1)
+            {
+                building.layer = 6;
+            }
+            else
+            {
+                building.layer = 7;
+            }
+
+
+            building.GetComponent<SpriteRenderer>().color = this.GetComponent<SpriteRenderer>().color;
+            building.GetComponent<Building>().owner = this;
+
+            if (tier == 0)
+            {
+                mass -= selectedBuilding.cost;
+                int selection = Random.Range(0, buildingList.Count);
+                selected = buildingList[selection].GetComponent<Building>();
+            }
+            else
+            {
+                advMass -= selectedBuilding.cost;
+                int selection = Random.Range(0, advBuildingList.Count);
+                advSelected = advBuildingList[selection].GetComponent<Building>();
+            }
+
+            units.Add(building);
+        }
     }
 
 
