@@ -31,15 +31,15 @@
         <TextBlock Text="Skirmish" HorizontalAlignment="Center" FontSize="30"/>
         <TextBlock Text="Team" HorizontalAlignment="Center" FontSize="20" Margin="0,50,0,0"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
-            <RadioButton Template="{StaticResource BaseButtonStyle}" Width="100" Height="30" Margin="5" Content="Red" Background="Red" GroupName="First Group" />
-            <RadioButton Template ="{StaticResource BaseButtonStyle}" Width="100" Height="30" Margin="5" Content="Blue" Background="Blue" GroupName="First Group" />
+            <RadioButton Template="{StaticResource BaseButtonStyle}" Width="100" Height="30" Margin="5" Content="Red" Background="Red" GroupName="First Group" IsChecked="{Binding Red}" />
+            <RadioButton Template ="{StaticResource BaseButtonStyle}" Width="100" Height="30" Margin="5" Content="Blue" Background="Blue" GroupName="First Group" IsChecked="{Binding Blue}"/>
         </StackPanel>
         <TextBlock Text="Map" HorizontalAlignment="Center" FontSize="20" Margin="0,50,0,0"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
-            <RadioButton Template="{StaticResource BaseButtonStyle}" Width="100" Height="30" Margin="5" Content="Map 1" Background="Gray"/>
-            <RadioButton Template="{StaticResource BaseButtonStyle}" Width="100" Height="30" Margin="5" Content="Map 2" Background="Gray"/>
-            <RadioButton Template="{StaticResource BaseButtonStyle}" Width="100" Height="30" Margin="5" Content="Map 3" Background="Gray"/>
+            <RadioButton Template="{StaticResource BaseButtonStyle}" Width="100" Height="30" Margin="5" Content="Map 1" Background="Gray" IsChecked="{Binding Map1}"/>
+            <RadioButton Template="{StaticResource BaseButtonStyle}" Width="100" Height="30" Margin="5" Content="Map 2" Background="Gray" IsChecked="{Binding Map2}"/>
+            <RadioButton Template="{StaticResource BaseButtonStyle}" Width="100" Height="30" Margin="5" Content="Map 3" Background="Gray" IsChecked="{Binding Map3}"/>
         </StackPanel>
-        <Button Width="100" Height="30" Content="Start" Margin="0,50,0,0"/>
+        <Button Width="100" Height="30" Content="Start" Margin="0,50,0,0" Command="{Binding StartCommand}"/>
     </StackPanel>
 </Grid>

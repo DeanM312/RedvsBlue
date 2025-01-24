@@ -23,14 +23,15 @@ public class Cam : MonoBehaviour
 
             Collider2D hit = null;
 
-            hit = Physics2D.OverlapPoint(mousePos2D, LayerMask.GetMask("Faction1"));
-
-            if (hit == null)
+            if (DataManager.team == "Faction1")
+            {
+                hit = Physics2D.OverlapPoint(mousePos2D, LayerMask.GetMask("Faction1"));
+            }
+            else
             {
                 hit = Physics2D.OverlapPoint(mousePos2D, LayerMask.GetMask("Faction2"));
             }
             
-
             if (hit != null)
             {
                 if (hit.gameObject.CompareTag("Unit"))
