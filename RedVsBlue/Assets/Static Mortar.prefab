@@ -163,4 +163,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   building: {fileID: 3725056983930785386}
   weaponPrefab: {fileID: 4148752083154824892, guid: 0fb45d087f5921c4486dfbecc4b8ea65, type: 3}
-  range: 25
+  range: 28
