@@ -38,7 +38,7 @@ public class SkirmishUI : MonoBehaviour, INotifyPropertyChanged
 
         if (Map1)
         {
-            SceneManager.LoadScene("BigMap", LoadSceneMode.Single);
+            SceneManager.LoadScene("Map1", LoadSceneMode.Single);
         }
     }
 
