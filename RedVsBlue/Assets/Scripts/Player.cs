@@ -36,11 +36,9 @@ public class Player : MonoBehaviour
             user.right = 0;
         }
 
-
+        Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
         if (Input.GetMouseButton(0))
         {
-            Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
-
             if (user.weapon.arty)
             {
                 if (Vector2.Distance(transform.position, mousePos2D) > user.range)
@@ -63,6 +61,8 @@ public class Player : MonoBehaviour
         {
             user.Down();
         }
+
+        user.weapon.Rotate(mousePos2D);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

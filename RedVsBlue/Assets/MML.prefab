@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1774397725485657625}
   - component: {fileID: 2757700189238899916}
-  - component: {fileID: 8578810585255576472}
+  - component: {fileID: -1295163600726592736}
   m_Layer: 2
-  m_Name: Super Gun
+  m_Name: MML
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 559104ae3f84b1041883b4b53218f837, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9d1f852b93fc58d43b5e10bf89ba632e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8578810585255576472
+--- !u!114 &-1295163600726592736
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,12 +94,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4148752083154824892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c11d6b287c90e046ad3b9ce458ff8ef, type: 3}
+  m_Script: {fileID: 11500000, guid: f96da821412d7d549879b208d8e0098c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firerate: 0.4
+  firerate: 3
   projectile: {fileID: 6363712749743850712, guid: bbbf120fc76c9864c9da356e9579b83f, type: 3}
   damage: 25
   range: 0
   speed: 30
   arty: 0
+  burstCount: 3
+  burstDelay: 0.3

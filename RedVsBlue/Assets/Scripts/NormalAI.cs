@@ -32,7 +32,6 @@ public class NormalAI : MonoBehaviour, IAI
     // Update is called once per frame
     void Update()
     {
-
         if (backTime > 0)
         {
             backTime -= 1 * Time.deltaTime;
@@ -40,10 +39,6 @@ public class NormalAI : MonoBehaviour, IAI
         }
         else
         {
-            if (forwardTime > 0)
-            {
-                forwardTime -= 1 * Time.deltaTime;
-            }
             user.right = 1 * dir;
         }
 
@@ -70,7 +65,6 @@ public class NormalAI : MonoBehaviour, IAI
                 {
                     predict = (Vector2.Distance(unit.transform.position, transform.position) / user.weapon.speed) * unit.GetComponent<Rigidbody2D>().velocity;
                 }
-
                 if (Vector2.Distance(unit.transform.position, transform.position) < user.range)
                 {
                     RaycastHit2D h = Physics2D.Linecast(transform.position, unit.transform.position, 1);
@@ -81,12 +75,18 @@ public class NormalAI : MonoBehaviour, IAI
                         if (delay > 9)
                         {
                             user.weapon.Fire(unit.transform.position + predict, user.owner.faction1);
-                            if (forwardTime <= 0)
+                            if (backTime <= 0)
                             {
                                 if (!user.owner.retreat)
                                 {
-                                    backTime = ((float)user.weapon.firerate) / 2;
-                                    forwardTime = Random.value * 0.05f;
+                                    if (Random.Range(0, 2) == 0)
+                                    {
+                                        backTime = Random.Range(1, (int)(user.weapon.firerate * 4));
+                                    }
+                                    else
+                                    {
+                                        backTime = ((float)user.weapon.firerate) / 2;
+                                    }
                                 }
                                 else
                                 {
@@ -98,7 +98,6 @@ public class NormalAI : MonoBehaviour, IAI
                         {
                             delay++;
                         }
-
                     }
                     else
                     {
@@ -131,13 +130,13 @@ public class NormalAI : MonoBehaviour, IAI
 
     void FixedUpdate()
     {
-
-        if (forwardTime > 0)
+        if (backTime > 0)
         {
 
             user.Jump();
-            
-            if (Random.Range(0, 15) == 0)
+
+
+            if (Random.Range(0, 15) == 0 && !user.onLadder)
             {
                 if (!Physics2D.OverlapPoint(transform.position - transform.up * user.hitbox.bounds.extents.y * 1.01f, 1))
                 {
@@ -145,7 +144,7 @@ public class NormalAI : MonoBehaviour, IAI
                 }
             }
         }
-        else if (Random.Range(0, 100) == 0)
+        else if (user.hp < user.maxhp)
         {
             user.Jump();
         }  

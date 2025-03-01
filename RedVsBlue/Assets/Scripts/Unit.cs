@@ -8,6 +8,7 @@ public class Unit : MonoBehaviour, IDamagable
     public float movespeed;
     private Rigidbody2D rb;
     public int hp;
+    public int maxhp;
     public uint range;
     public GameObject weaponPrefab;
     [System.NonSerialized]
@@ -21,6 +22,7 @@ public class Unit : MonoBehaviour, IDamagable
     private float flashTime;
     private bool hit;
     private int down;
+    public bool onLadder;
 
 
     // Start is called before the first frame update
@@ -34,6 +36,8 @@ public class Unit : MonoBehaviour, IDamagable
         rb = this.GetComponent<Rigidbody2D>();
 
         hitbox = GetComponent<BoxCollider2D>();
+
+        maxhp = hp;
     }
 
     // Update is called once per frame
@@ -67,6 +71,14 @@ public class Unit : MonoBehaviour, IDamagable
         {
             rb.AddForce(transform.up * -50);
             down = 0;
+        }
+
+        if (onLadder)
+        {
+            if (rb.velocity.y < 5)
+            {
+                rb.AddForce(transform.up * 20);
+            }
         }
     }
 
@@ -140,16 +152,18 @@ public class Unit : MonoBehaviour, IDamagable
             }
 
         }
+        if (other.gameObject.CompareTag("Ladder"))
+        {
+            onLadder = true;
+        }
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Ladder"))
         {
-            if (rb.velocity.y < 100)
-            {
-                rb.AddForce(transform.up * 20);
-            }
+            onLadder = false;
         }
     }
 

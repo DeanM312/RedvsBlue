@@ -77,7 +77,7 @@ public class Base : MonoBehaviour
             constructBuliding(advSelected, 1);
         }
 
-        if (advantage < 0.9)
+        if (advantage < 0.2)
         {
             retreat = true;
         }

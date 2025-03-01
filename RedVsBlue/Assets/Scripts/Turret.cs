@@ -42,7 +42,7 @@ public class Turret : MonoBehaviour
                     predict = (Vector2.Distance(unit.transform.position, transform.position) / weaponScript.speed) * unit.GetComponent<Rigidbody2D>().velocity;
                 }
 
-                if (Mathf.Abs(unit.transform.position.x - transform.position.x) < range)
+                if (Mathf.Abs(unit.transform.position.x - transform.position.x) < range+1)
                 {
                     RaycastHit2D h = Physics2D.Linecast(transform.position, unit.transform.position, 1);
 

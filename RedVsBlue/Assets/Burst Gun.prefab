@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1774397725485657625}
   - component: {fileID: 2757700189238899916}
-  - component: {fileID: 8578810585255576472}
+  - component: {fileID: 9081173939583875723}
   m_Layer: 2
-  m_Name: Super Gun
+  m_Name: Burst Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8578810585255576472
+--- !u!114 &9081173939583875723
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,12 +94,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4148752083154824892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c11d6b287c90e046ad3b9ce458ff8ef, type: 3}
+  m_Script: {fileID: 11500000, guid: f96da821412d7d549879b208d8e0098c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firerate: 0.4
-  projectile: {fileID: 6363712749743850712, guid: bbbf120fc76c9864c9da356e9579b83f, type: 3}
-  damage: 25
+  firerate: 3
+  projectile: {fileID: 6363712749743850712, guid: bbabfae2374232740ac4e980c9dc600d, type: 3}
+  damage: 35
   range: 0
   speed: 30
   arty: 0
+  burstCount: 6
+  burstDelay: 0.05
