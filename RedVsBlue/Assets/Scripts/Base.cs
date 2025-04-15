@@ -26,7 +26,7 @@ public class Base : MonoBehaviour
         hp = 1000;
         mass = 0;
         advMass = 0;
-        buildTime = 14;
+        buildTime = 20;
         unitCap = 50;
         units.Add(this.gameObject);
 
@@ -135,46 +135,48 @@ public class Base : MonoBehaviour
                 }
                 else
                 {
-                    front++;
+                    front--;
                 }
             }
         }
 
-
-        BoxCollider2D hitbox = units[front].GetComponent<BoxCollider2D>();
-
-        if (Physics2D.OverlapPoint(units[front].transform.position - (units[front].transform.up * hitbox.size.y) / 2, 1) && Physics2D.OverlapPointAll(units[front].transform.position).Length < 2 && units[front].CompareTag("Unit"))
+        if (units[front])
         {
-            GameObject building = Instantiate(selectedBuilding.gameObject, units[front].transform.position, Quaternion.identity);
-            building.transform.Translate(0, (building.GetComponent<BoxCollider2D>().size.y - hitbox.size.y) / 2, 0);
+            BoxCollider2D hitbox = units[front].GetComponent<BoxCollider2D>();
 
-            if (faction1)
+            if (Physics2D.OverlapPoint(units[front].transform.position - (units[front].transform.up * hitbox.size.y) / 2, 1) && Physics2D.OverlapPointAll(units[front].transform.position).Length < 2 && units[front].CompareTag("Unit"))
             {
-                building.layer = 6;
-            }
-            else
-            {
-                building.layer = 7;
-            }
+                GameObject building = Instantiate(selectedBuilding.gameObject, units[front].transform.position, Quaternion.identity);
+                building.transform.Translate(0, (building.GetComponent<BoxCollider2D>().size.y - hitbox.size.y) / 2, 0);
+
+                if (faction1)
+                {
+                    building.layer = 6;
+                }
+                else
+                {
+                    building.layer = 7;
+                }
 
 
-            building.GetComponent<SpriteRenderer>().color = this.GetComponent<SpriteRenderer>().color;
-            building.GetComponent<Building>().owner = this;
+                building.GetComponent<SpriteRenderer>().color = this.GetComponent<SpriteRenderer>().color;
+                building.GetComponent<Building>().owner = this;
 
-            if (tier == 0)
-            {
-                mass -= selectedBuilding.cost;
-                int selection = Random.Range(0, buildingList.Count);
-                selected = buildingList[selection].GetComponent<Building>();
-            }
-            else
-            {
-                advMass -= selectedBuilding.cost;
-                int selection = Random.Range(0, advBuildingList.Count);
-                advSelected = advBuildingList[selection].GetComponent<Building>();
-            }
+                if (tier == 0)
+                {
+                    mass -= selectedBuilding.cost;
+                    int selection = Random.Range(0, buildingList.Count);
+                    selected = buildingList[selection].GetComponent<Building>();
+                }
+                else
+                {
+                    advMass -= selectedBuilding.cost;
+                    int selection = Random.Range(0, advBuildingList.Count);
+                    advSelected = advBuildingList[selection].GetComponent<Building>();
+                }
 
-            units.Add(building);
+                units.Add(building);
+            }
         }
     }
 

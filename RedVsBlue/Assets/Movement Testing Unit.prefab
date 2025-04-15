@@ -10,12 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6176610222213878772}
   - component: {fileID: 6176610222213878773}
-  - component: {fileID: 6176610222213878775}
   - component: {fileID: 6176610222213878774}
-  - component: {fileID: 1657302156075901659}
-  - component: {fileID: 2054191334974200}
-  m_Layer: 6
-  m_Name: Brick
+  - component: {fileID: 4079311093511803042}
+  - component: {fileID: -8243416928056873634}
+  m_Layer: 7
+  m_Name: Movement Testing Unit
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 0a71f3503bc3e8e428228facd7f295cd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d202ff9bf79251841ad70fcd3f755172, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -88,33 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &6176610222213878775
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6176610222213878778}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: df87712649b14d943a232200da24dac4, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 1
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
 --- !u!61 &6176610222213878774
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -158,9 +130,9 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.4, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1657302156075901659
+--- !u!114 &4079311093511803042
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,26 +141,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 6176610222213878778}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfdde7f9e3838a541b9f1971b88d5a40, type: 3}
+  m_Script: {fileID: 11500000, guid: 676489e6796edbd448bd23eb563735d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 0}
-  movespeed: 1
-  hp: 350
-  range: 14
-  weaponPrefab: {fileID: 4148752083154824892, guid: 1dc4b27378542654baf135ee2ad75b10, type: 3}
-  buildTime: 10
-  hitbox: {fileID: 0}
---- !u!114 &2054191334974200
-MonoBehaviour:
+  movementSpeed: 3
+  jumpSpeed: 500
+--- !u!50 &-8243416928056873634
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6176610222213878778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7c58df2f9499544f9c162f684114599, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  user: {fileID: 1657302156075901659}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

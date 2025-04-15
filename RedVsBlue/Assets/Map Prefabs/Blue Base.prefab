@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2101205674557364192, guid: a82e0256f4c05f04c97e69b8504037f9, type: 3}
       propertyPath: m_Name
-      value: Base
+      value: Blue Base
       objectReference: {fileID: 0}
     - target: {fileID: 2101205674557364194, guid: a82e0256f4c05f04c97e69b8504037f9, type: 3}
       propertyPath: m_RootOrder

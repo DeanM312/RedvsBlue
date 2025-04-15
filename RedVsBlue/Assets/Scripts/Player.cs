@@ -23,11 +23,11 @@ public class Player : MonoBehaviour
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         cam.gameObject.transform.position = transform.position + (mousePos - new Vector3(transform.position.x, transform.position.y, 1))/ 2;
 
-        if (Input.GetAxis("Horizontal") > 0)
+        if (Input.GetKey("d"))
         {
             user.right = 1;
         }
-        else if (Input.GetAxis("Horizontal") < 0)
+        else if (Input.GetKey("a"))
         {
             user.right = -1;
         }
@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         }
 
 
-        if (Input.GetAxis("Vertical") > 0)
+        if (Input.GetKey("w"))
         {
             user.Jump();
         }
@@ -63,13 +63,23 @@ public class Player : MonoBehaviour
         }
 
         user.weapon.Rotate(mousePos2D);
+
+        if (Input.GetKey("x"))
+        {
+            NormalAI ai = user.GetComponent<NormalAI>();
+            if (ai)
+            {
+                ai.enabled = true;
+            }    
+            Destroy(this);
+        }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.tag == "Pad")
         {
-            if (Input.GetAxis("Vertical") > 0)
+            if (Input.GetKey("w"))
             {
                 user.PadJump();
             }

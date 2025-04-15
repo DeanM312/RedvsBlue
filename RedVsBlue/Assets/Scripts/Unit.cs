@@ -6,7 +6,6 @@ public class Unit : MonoBehaviour, IDamagable
 {
     public Base owner;
     public float movespeed;
-    private Rigidbody2D rb;
     public int hp;
     public int maxhp;
     public uint range;
@@ -23,6 +22,12 @@ public class Unit : MonoBehaviour, IDamagable
     private bool hit;
     private int down;
     public bool onLadder;
+    private bool isGrounded = false;
+    private float yVelocity = 0;
+    public GameObject hpBar;
+    private GameObject barInstance;
+    [HideInInspector]
+    public bool healing;
 
 
     // Start is called before the first frame update
@@ -33,57 +38,67 @@ public class Unit : MonoBehaviour, IDamagable
         weaponObject.GetComponent<SpriteRenderer>().color = (this.GetComponent<SpriteRenderer>().color);
         weapon = weaponObject.GetComponent<Weapon>();
         weapon.range = range - 0.1f;
-        rb = this.GetComponent<Rigidbody2D>();
-
         hitbox = GetComponent<BoxCollider2D>();
 
+        if (hpBar)
+        {
+            barInstance = Instantiate(hpBar, transform.position, Quaternion.identity);
+            barInstance.transform.Translate(0, 0.7f, 0);
+            barInstance.transform.parent = transform;
+        }
+
         maxhp = hp;
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-
-        switch (jump)
-        {
-            case 1:
-                rb.AddForce(transform.up * 400);
-                jump = 0;
-                break;
-            case 2:
-                rb.AddForce(transform.up * 600);
-                jump = 0;
-                break;
-        }
-
-        if (jumpDelay >= 0)
-        {
-            jumpDelay -= 1 * Time.fixedDeltaTime;
-        }
-
-        rb.AddForce(transform.right * right * 80);
-
-
-
-        rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -movespeed, movespeed), rb.velocity.y);
-
-        if (rb.velocity.y > -100 && down == 1)
-        {
-            rb.AddForce(transform.up * -50);
-            down = 0;
-        }
-
-        if (onLadder)
-        {
-            if (rb.velocity.y < 5)
-            {
-                rb.AddForce(transform.up * 20);
-            }
-        }
+        healing = false;
     }
 
     private void Update()
     {
+        float test = Mathf.Sign(yVelocity);
+        Vector3 bottomPos = new Vector3(transform.position.x, transform.position.y + (hitbox.bounds.extents.y * test) + (0.01f * test));
+        RaycastHit2D h = Physics2D.Linecast(bottomPos, bottomPos + new Vector3(0, yVelocity / 100, 0), 1);
+
+        if (h)
+        {
+            if (test < 0)
+            {
+                isGrounded = true;
+            }
+
+            yVelocity = 0;
+        }
+        else
+        {
+            jump = 0;
+            transform.Translate(0, yVelocity/ DataManager.FRAMERATE, 0);
+        }
+
+        if (isGrounded)
+        {
+            switch (jump)
+            {
+                case 1:
+                    isGrounded = false;
+                    jump = 0;
+                    yVelocity = 8;
+                    break;
+                case 2:
+                    isGrounded = false;
+                    jump = 0;
+                    yVelocity = 12;
+                    break;
+            }
+        }
+
+        if (yVelocity > -11)
+        {
+            yVelocity -= 9.8f/ DataManager.FRAMERATE;
+        }
+
+        if (onLadder)
+        {
+            yVelocity = 10;
+        }
+
         if (flashTime > 0)
         {
             flashTime = flashTime - 1 * Time.deltaTime;
@@ -93,33 +108,24 @@ public class Unit : MonoBehaviour, IDamagable
             this.GetComponent<SpriteRenderer>().color = this.owner.GetComponent<SpriteRenderer>().color;
             hit = false;
         }
+        Vector3 rightPos = new Vector3(transform.position.x + (hitbox.bounds.extents.x * right) + (0.01f * right), transform.position.y);
+        RaycastHit2D xHit = Physics2D.Linecast(rightPos, rightPos + new Vector3(0, (right * movespeed) / 1000, 0), 1);
 
-
+        if (!xHit)
+        {
+            transform.Translate((right * movespeed)/ DataManager.FRAMERATE, 0, 0);
+        }
     }
 
     public void Jump()
     {
-        if (Physics2D.OverlapPoint(transform.position - transform.up * hitbox.bounds.extents.y * 1.05f, 1) && jumpDelay <= 0)
-        {
-            rb.velocity = Vector2.zero;
-            jumpDelay = 0.05f;
-            jump = 1;
-        }
+        jump = 1;
     }
 
     public void PadJump()
     {
-        if (jumpDelay <= 0)
-        {
-            rb.velocity = Vector2.zero;
-            jump = 2;
-            jumpDelay = 0.5f;
-        }
+        jump = 2;
     }
-
-
-
-
 
     void OnCollisionEnter2D(Collision2D col)
     {
@@ -130,7 +136,6 @@ public class Unit : MonoBehaviour, IDamagable
 
 
     }
-
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -152,7 +157,7 @@ public class Unit : MonoBehaviour, IDamagable
             }
 
         }
-        if (other.gameObject.CompareTag("Ladder"))
+        else if (other.gameObject.CompareTag("Ladder"))
         {
             onLadder = true;
         }
@@ -179,10 +184,21 @@ public class Unit : MonoBehaviour, IDamagable
             owner.units.Remove(this.gameObject);
             Destroy(this.gameObject);
         }
+        RefreshBar();
     }
 
     public void Down()
     {
         down = 1;
+    }
+
+    public void RefreshBar()
+    {
+        if (barInstance)
+        {
+            Vector3 scale = barInstance.transform.localScale;
+            scale.x = (hp * 1.0f / maxhp);
+            barInstance.transform.localScale = scale;
+        }
     }
 }

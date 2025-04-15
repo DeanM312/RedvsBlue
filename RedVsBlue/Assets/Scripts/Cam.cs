@@ -7,13 +7,13 @@ public class Cam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Input.GetAxis("Horizontal") * 10 * Time.deltaTime, Input.GetAxis("Vertical") * 10 * Time.deltaTime, 0);
+        transform.Translate(Input.GetAxis("Horizontal") * 30 * Time.deltaTime, Input.GetAxis("Vertical") * 30 * Time.deltaTime, 0);
 
 
         if (Input.GetMouseButtonDown(0))
@@ -41,6 +41,7 @@ public class Cam : MonoBehaviour
                     Player player = hit.gameObject.AddComponent<Player>();
                     player.user = hit.gameObject.GetComponent<Unit>();
                     player.cam = this;
+                    Camera.main.orthographicSize = player.user.range / 2.5f;
                 }
             }
         }

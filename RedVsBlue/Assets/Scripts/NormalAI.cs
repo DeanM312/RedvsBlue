@@ -32,10 +32,14 @@ public class NormalAI : MonoBehaviour, IAI
     // Update is called once per frame
     void Update()
     {
-        if (backTime > 0)
+        if (backTime > 0 || user.hp < user.maxhp/2)
         {
             backTime -= 1 * Time.deltaTime;
             user.right = -1 * dir;
+        }
+        else if (user.healing == true)
+        {
+            user.right = 0;
         }
         else
         {
@@ -158,7 +162,7 @@ public class NormalAI : MonoBehaviour, IAI
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Pad")
+        if (other.gameObject.tag == "Pad" && this.enabled)
         {
             if (Random.Range(0, 2) == 1)
             {

@@ -10,12 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6176610222213878772}
   - component: {fileID: 6176610222213878773}
-  - component: {fileID: 6176610222213878775}
   - component: {fileID: 6176610222213878774}
   - component: {fileID: 1657302156075901659}
   - component: {fileID: 2054191334974200}
   m_Layer: 6
-  m_Name: Tank
+  m_Name: Brick
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: aeb62b90a177e5644a43a357c0b7e5f8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0a71f3503bc3e8e428228facd7f295cd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -88,33 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &6176610222213878775
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6176610222213878778}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: df87712649b14d943a232200da24dac4, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 1
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 4
 --- !u!61 &6176610222213878774
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -151,7 +123,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5, y: 1.5}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -173,12 +145,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  movespeed: 2
-  hp: 150
-  range: 16
-  weaponPrefab: {fileID: 4148752083154824892, guid: ebeb1a150c5c15543b8b0ad922c4c9dc, type: 3}
+  movespeed: 5
+  hp: 350
+  maxhp: 0
+  range: 14
+  weaponPrefab: {fileID: 4148752083154824892, guid: 1dc4b27378542654baf135ee2ad75b10, type: 3}
   buildTime: 10
   hitbox: {fileID: 0}
+  onLadder: 0
+  hpBar: {fileID: 7671693812501150178, guid: e17a252b94119f546869c0a8bb2a6977, type: 3}
+  healing: 0
 --- !u!114 &2054191334974200
 MonoBehaviour:
   m_ObjectHideFlags: 0

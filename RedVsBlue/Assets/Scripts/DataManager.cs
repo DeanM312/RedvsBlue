@@ -5,4 +5,5 @@ using UnityEngine;
 public static class DataManager
 {
     public static string team = "";
+    public static int FRAMERATE = 120;
 }
